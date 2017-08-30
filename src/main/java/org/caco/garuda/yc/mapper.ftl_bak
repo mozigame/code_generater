@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="${module}.dao.I${entityName}Dao">
+
+	<!-- ${tableName}的字段映射 -->
+	<resultMap type="${module}.pojo.${entityName}" id="${resultMap}">
+		<#list columns as column>
+		<#if column.primary >
+		<id column="${column.columnName}" property="${column.fieldName}"/>
+		<#else>
+		<result column="${column.columnName}" property="${column.fieldName}"/>
+		</#if>
+		</#list>
+	</resultMap>
+	
+	<!-- ${tableName}的查询条件 -->
+	<sql id="query_condition">
+		<where>
+	<#list searchColumns as column>
+		<#if column_index==0>
+			<if test="${column.fieldName} != null">
+				${column.columnName} = #${'{'}${column.fieldName}${'}'}
+			</if>
+		<#else>
+			<if test="${column.fieldName} != null">
+				and ${column.columnName} = #${'{'}${column.fieldName}${'}'}
+			</if>							
+		</#if>
+	</#list>
+		</where>	
+	</sql>
+	
+	<!-- ${tableName}的排序规则 -->
+	<sql id="query_sort">
+		<if test="sort != null">
+			order by ${r'${sort} ${order}'}
+		</if>
+	</sql>
+	
+	<!-- ${tableName}的基本查询  -->
+	<sql id="base_query">
+		select * from ${tableName}
+	</sql>		
+
+	<!-- ${tableName}按主键查找  -->
+	<select id="load" parameterType="long" resultMap="${resultMap}">
+		<include refid="base_query"></include> 
+		<#list columns as column>
+		<#if column.primary >
+		where ${column.columnName}=#${'{'}${column.fieldName}${'}'}
+		<#break>
+		</#if>
+		</#list>
+	</select>
+
+	<!-- ${tableName}新增  -->
+	<#list columns as column>
+	<#if column.primary >
+	<insert id="save" parameterType="${module}.pojo.${entityName}" keyProperty="${column.fieldName}" keyColumn="${column.columnName}" useGeneratedKeys="true">
+	<#break>
+	</#if>
+	</#list>	
+		insert into ${tableName} (<#list columns as column><#if !column.primary>${column.columnName}<#if column_has_next>,</#if></#if></#list>) 
+		values (
+			<#list columns as column>
+			<#if !column.primary>
+			#${'{'}${column.fieldName},jdbcType=${column.jdbcType}${'}'}<#if column_has_next>,</#if>
+			</#if>
+			</#list>
+		)
+	</insert>
+	
+	<!-- ${tableName}更新  -->
+	<update id="update" parameterType="${module}.pojo.${entityName}">
+		update ${tableName} set 
+			<#list columns as column>
+			<#if !column.primary>
+			${column.columnName}=#${'{'}${column.fieldName},jdbcType=${column.jdbcType}${'}'}<#if column_has_next>,</#if>
+			</#if>
+			</#list>
+		<#list columns as column>
+		<#if column.primary >
+		where ${column.columnName}=#${'{'}${column.fieldName}${'}'}
+		<#break>
+		</#if>
+		</#list>					
+	</update>
+	
+	<!-- ${tableName}按主键删除  -->
+	<delete id="delete" parameterType="long">
+		delete from ${tableName}
+		<#list columns as column>
+		<#if column.primary >
+		where ${column.columnName}=#${'{'}${column.fieldName}${'}'}
+		<#break>
+		</#if>
+		</#list>		
+	</delete>
+	
+	<!-- ${tableName}按主键批量删除  -->
+	<delete id="deleteBatch" parameterType="java.util.List">
+		<#list columns as column>
+		<#if column.primary >
+		delete from ${tableName} where ${column.columnName} in		
+		<foreach collection="${column.fieldName}s" open="(" close=")" separator="," item="item">
+			#${'{'}item${'}'}
+		</foreach>
+		<#break>
+		</#if>
+		</#list>			
+	</delete>	
+	
+	<!-- ${tableName}查询  -->
+	<select id="findBy" parameterType="${module}.pojo.${entityName}" resultMap="${resultMap}">
+		<include refid="base_query"></include>
+		<include refid="query_condition"></include>
+		<include refid="query_sort"></include>
+	</select>
+	
+	<!-- ${tableName}总数目  -->
+	<select id="findCount" parameterType="${module}.pojo.${entityName}" resultType="long">
+		select count(1) from ${tableName} 
+		<include refid="query_condition"></include>
+	</select>
+	
+	<!-- ${tableName}分页查询  -->
+	<select id="findByPage" parameterType="${module}.pojo.${entityName}" resultMap="${resultMap}">
+		<include refid="base_query"></include>
+		<include refid="query_condition"></include>
+		<include refid="query_sort"></include>
+		limit ${r'${(page-1)*rows}'},${r'${rows}'}
+	</select>
+	
+</mapper>	

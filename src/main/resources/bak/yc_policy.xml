@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd  
+           http://www.springframework.org/schema/aop   
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx-3.2.xsd  
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<bean id="dataSource" class="org.caco.generator.util.DataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.3.11:3306/pdms?characterEncoding=utf-8" />
+		<property name="username" value="root" />
+		<property name="password" value="testdb123" />
+	</bean>
+	<bean id="mySqlHelper" class="org.caco.generator.util.MySqlHelper">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 重复生成会删除旧的代码再生成新的 -->
+	<bean id="config" class="org.caco.generator.bean.Config">
+		<!-- 表名  -->
+		<property name="tableName" value="yc_policy"/>
+		<!-- 实体名称  -->
+		<property name="entityName" value="Policy"/>
+		<!-- 模块名称，代码安放的目录 -->
+		<property name="modelName" value="ins"/>
+		<!-- 全包名 -->
+		<property name="pakeage" value="ai.yc.ins.base"/>
+		<!-- 代码作者 -->
+		<property name="author" value="Caco"/>
+		<!-- 精确匹配查询，多个以","隔开 -->
+		<property name="equalsSearchColumns" value="orderId,policyNo,insureStatus,insureSuccess"/>
+		<!-- 模糊查询条件，多个以","隔开 -->
+<!-- 		<property name="likeSearchColumns" value="title,description"/> -->
+		<!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
+<!-- 		<property name="hidePOColumns" value=""/> -->
+		<!-- 定义哪些属性在jsp grid中显示或不显示，多个以","隔开，属性前添加"!"相反 -->
+<!-- 		<property name="hideGridColumns" value="!status"/> -->
+		<!-- 编辑时绑定下拉数据 -->
+<!-- 		<property name="dictColumns" value="status:dict_tf_status"/> -->
+		<!-- 编辑时绑定下拉数据，包含all选项 -->
+		<property name="dictAllColumns" value="insureStatus:dict_yc_insure_status,insureSuccess:dict_yc_insure_success"/>
+		<!-- 外键关联，查询关联的名称 -->
+<!-- 		<property name="fkColumns" value="systemInfoId:systemInfo,intfInfoId:intfInfo"/> -->
+	</bean>
+</beans>

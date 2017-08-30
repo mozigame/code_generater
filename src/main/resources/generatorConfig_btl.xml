@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+           http://www.springframework.org/schema/aop   
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<bean id="dataSource" class="org.caco.generator.util.DataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://121.40.34.191:3306/ycweb?characterEncoding=utf-8" />
+		<property name="username" value="ycwebcarl" />
+		<property name="password" value="4k0/#Yd9[" />
+	</bean>
+	<bean id="mySqlHelper" class="org.caco.generator.util.MySqlHelper">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 重复生成会删除旧的代码再生成新的 -->
+	<bean id="config" class="org.caco.generator.bean.Config">
+		<!-- 表名  -->
+		<property name="tableName" value="yc_order"/>
+		<!-- 实体名称  -->
+		<property name="entityName" value="Order"/>
+		<!-- 模块名称，代码安放的目录 -->
+		<property name="modelName" value="btl"/>
+		<!-- 全包名 -->
+		<property name="pakeage" value="ai.yc.dashboard.btl"/>
+		<!-- 代码作者 -->
+		<property name="author" value="Caco"/>
+		<!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
+		<property name="hidePOColumns" value="!cid"/>
+	</bean>
+</beans>

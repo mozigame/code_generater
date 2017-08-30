@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+           http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+           http://www.springframework.org/schema/aop   
+           http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+           http://www.springframework.org/schema/tx  
+           http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+           http://www.springframework.org/schema/context  
+           http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+	default-autowire="byName" default-lazy-init="false">
+	<bean id="dataSource" class="org.caco.generator.util.DataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://192.168.3.11:3306/pdms?characterEncoding=utf-8" />
+		<property name="username" value="root" />
+		<property name="password" value="testdb123" />
+	</bean>
+	<bean id="mySqlHelper" class="org.caco.generator.util.MySqlHelper">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	<!-- 重复生成会删除旧的代码再生成新的 -->
+	<bean id="config" class="org.caco.generator.bean.Config">
+		<!-- 表名  -->
+		<property name="tableName" value="tf_user"/>
+		<!-- 实体名称  -->
+		<property name="entityName" value="User"/>
+		<!-- 模块名称，代码安放的目录 -->
+		<property name="modelName" value="ins"/>
+		<!-- 全包名 -->
+		<property name="pakeage" value="ai.yc.ins.base"/>
+		<!-- 代码作者 -->
+		<property name="author" value="Caco"/>
+		<!-- 精确匹配查询，多个以","隔开 -->
+		<property name="equalsSearchColumns" value="mobile,idCard,email"/>
+		<!-- 模糊查询条件，多个以","隔开 -->
+		<property name="likeSearchColumns" value="name"/>
+		<!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
+		<property name="hidePOColumns" value=""/>
+		<!-- 定义哪些属性在jsp grid中显示或不显示，多个以","隔开，属性前添加"!"相反 -->
+		<property name="hideGridColumns" value="!name,passwd"/>
+		<!-- 把栏位code转成text，如性别"1"转成"男" -->
+		<property name="renderColumns" value="sex:renderSex,cardType:renderCardType"/>
+		<!-- 编辑时绑定下拉数据 -->
+		<property name="dictColumns" value="sex:dict_tf_sex"/>
+		<!-- 编辑时绑定下拉数据，包含all选项 -->
+		<property name="dictAllColumns" value="cardType:dict_tf_card_type"/>
+	</bean>
+</beans>

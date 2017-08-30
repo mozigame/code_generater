@@ -1,0 +1,1 @@
+INSERT INTO tf_sequence (name, current_value, increment) VALUES  ('_${prefix}_${entityName?uncap_first}_cid_seq', 1, 1);
