@@ -12,9 +12,9 @@
 	default-autowire="byName" default-lazy-init="false">
 	<bean id="dataSource" class="org.caco.generator.util.DataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.3.11:3306/law_help?characterEncoding=utf-8" />
+		<property name="url" value="jdbc:mysql://192.168.0.253:3306/lottery?characterEncoding=utf-8" />
 		<property name="username" value="root" />
-		<property name="password" value="testdb123" />
+		<property name="password" value="admin" />
 	</bean>
 	<bean id="mySqlHelper" class="org.caco.generator.util.MySqlHelper">
 		<property name="dataSource" ref="dataSource"/>
@@ -22,17 +22,17 @@
 	<!-- 重复生成会删除旧的代码再生成新的 -->
 	<bean id="config" class="org.caco.generator.bean.Config">
 		<!-- 表名  -->
-		<property name="tableName" value="lh_customer_product"/>
+		<property name="tableName" value="tf_sysconfig"/>
 		<!-- 实体名称  -->
-		<property name="entityName" value="CustomerProduct"/>
+		<property name="entityName" value="Sysconfig2"/>
 		<!-- 模块名称，代码安放的目录 -->
-		<property name="modelName" value="ins"/>
+		<property name="modelName" value="ares"/>
 		<!-- 全包名 -->
-		<property name="pakeage" value="ai.yc.ins.lawhelp"/>
+		<property name="pakeage" value="com.babel.ares"/>
 		<!-- 代码作者 -->
 		<property name="author" value="Jview"/>
 		<!-- 精确匹配查询，多个以","隔开 -->
-		<property name="equalsSearchColumns" value="code,customerId,status,expireDate"/>
+		<property name="equalsSearchColumns" value="code,name,status,expireDate"/>
 		<!-- 模糊查询条件，多个以","隔开 -->
 <!-- 		<property name="likeSearchColumns" value="title,description"/> -->
 		<!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
