@@ -5,7 +5,7 @@ import java.util.Map;
 
 <#list columns as column>
 <#if column.fieldName=="ifDel">
-import com.babel.core.data.RetData;
+import com.babel.common.core.data.RetData;
 <#break>
 </#if>
 </#list>

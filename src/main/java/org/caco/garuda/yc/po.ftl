@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @Table(name = "${tableName}")
 @XmlRootElement(name="${entityName?uncap_first}")
 @JsonInclude(Include.NON_NULL)
-public class ${entityName}PO extends BaseEntityOnId {
+public class ${entityName}PO extends BaseEntityTimestamp {
     /**
 	 * 
 	 */
