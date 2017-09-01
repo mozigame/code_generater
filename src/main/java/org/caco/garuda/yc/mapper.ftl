@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.babel.core.page.PageVO;
+import com.babel.common.core.page.PageVO;
 import ${module}.model.${entityName}PO;
 import tk.mybatis.mapper.common.MapperMy;
 

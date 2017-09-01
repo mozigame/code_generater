@@ -12,16 +12,16 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.StringUtil;
 <#list columns as column>
 <#if column.fieldName=="ifDel">
-import com.babel.core.data.RetData;
-import com.babel.core.exception.InputNullException;
-import com.babel.core.exception.UnknownException;
+import com.babel.common.core.data.RetData;
+import com.babel.common.core.exception.InputNullException;
+import com.babel.common.core.exception.UnknownException;
 <#break>
 </#if>
 </#list>
-import com.babel.core.exception.BaseException;
-import com.babel.core.exception.MultiException;
-import com.babel.core.page.PageVO;
-import com.babel.core.service.impl.BaseService;
+import com.babel.common.core.exception.BaseException;
+import com.babel.common.core.exception.MultiException;
+import com.babel.common.core.page.PageVO;
+import com.babel.common.core.service.impl.BaseService;
 import ${module}.mapper.${entityName}Mapper;
 import ${module}.model.${entityName}PO;
 import ${module}.service.I${entityName}Service;

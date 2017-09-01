@@ -7,7 +7,7 @@ import java.util.Date;
 <#break>
 </#if>
 </#list>
-import com.babel.core.entity.BaseEntityOnId;
+import com.babel.common.core.entity.BaseEntityTimestamp;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;

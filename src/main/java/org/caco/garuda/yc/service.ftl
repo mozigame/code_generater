@@ -9,9 +9,9 @@ import com.babel.core.data.RetData;
 <#break>
 </#if>
 </#list>
-import com.babel.core.exception.BaseException;
-import com.babel.core.page.PageVO;
-import com.babel.core.service.IBaseService;
+import com.babel.common.core.exception.BaseException;
+import com.babel.common.core.page.PageVO;
+import com.babel.common.core.service.IBaseService;
 import ${module}.model.${entityName}PO;
 
 public interface I${entityName}Service  extends IBaseService<${entityName}PO> {

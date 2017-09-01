@@ -60,13 +60,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 
-import com.babel.core.data.RetData;
-import com.babel.core.page.PageVO;
+import com.babel.common.core.data.RetData;
+import com.babel.common.core.page.PageVO;
 <#if hasIfDel=="true">
-import com.babel.web.context.AppContext;
-import com.babel.core.exception.BaseException;
+import com.babel.common.web.context.AppContext;
+import com.babel.common.core.exception.BaseException;
 </#if>
-import com.babel.web.filter.BaseController;
+import com.babel.common.web.BaseController;
 import ${module}.model.${entityName}PO;
 import ${module}.service.I${entityName}Service;
 
