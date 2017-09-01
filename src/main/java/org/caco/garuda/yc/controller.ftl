@@ -66,7 +66,7 @@ import com.babel.common.core.page.PageVO;
 import com.babel.common.web.context.AppContext;
 import com.babel.common.core.exception.BaseException;
 </#if>
-import com.babel.common.web.BaseController;
+import com.babel.common.web.controller.BaseController;
 import ${module}.model.${entityName}PO;
 import ${module}.service.I${entityName}Service;
 
