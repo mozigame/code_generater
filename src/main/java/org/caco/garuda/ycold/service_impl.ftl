@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import com.alibaba.druid.support.logging.Log;
 import com.alibaba.druid.support.logging.LogFactory;
 
-import com.babel.core.data.RetResult;
-import com.babel.core.exception.RetException;
-import com.babel.core.page.PageVO;
-import com.babel.core.service.impl.BaseService;
+import com.babel.common.core.data.RetResult;
+import com.babel.common.core.exception.RetException;
+import com.babel.common.core.page.PageVO;
+import com.babel.common.core.service.impl.BaseService;
 import ${module}.mapper.${entityName}Mapper;
 import ${module}.model.${entityName}PO;
 import ${module}.service.I${entityName}Service;

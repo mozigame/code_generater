@@ -1,18 +1,18 @@
 package ${module}.service;
 
-import java.util.List;
-import java.util.Map;
-
+import ${module}.model.${entityName}PO;
 <#list columns as column>
 <#if column.fieldName=="ifDel">
-import com.babel.core.data.RetData;
+import com.babel.common.core.data.RetData;
 <#break>
 </#if>
 </#list>
 import com.babel.common.core.exception.BaseException;
 import com.babel.common.core.page.PageVO;
 import com.babel.common.core.service.IBaseService;
-import ${module}.model.${entityName}PO;
+
+import java.util.List;
+import java.util.Map;
 
 public interface I${entityName}Service  extends IBaseService<${entityName}PO> {
 	

@@ -2,10 +2,10 @@ package ${module}.service;
 
 import java.util.List;
 
-import com.babel.core.data.RetResult;
-import com.babel.core.exception.RetException;
-import com.babel.core.page.PageVO;
-import com.babel.core.service.IBaseService;
+import com.babel.common.core.data.RetResult;
+import com.babel.common.core.exception.RetException;
+import com.babel.common.core.page.PageVO;
+import com.babel.common.core.service.IBaseService;
 import ${module}.model.${entityName}PO;
 
 public interface I${entityName}Service  extends IBaseService<${entityName}PO> {

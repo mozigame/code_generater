@@ -1,6 +1,6 @@
 package ${module}.model;
 
-import com.babel.core.entity.BaseEntity;
+import com.babel.common.core.entity.BaseEntity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
