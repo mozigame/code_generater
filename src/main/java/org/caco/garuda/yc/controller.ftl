@@ -156,10 +156,10 @@ public class ${entityName}Controller extends BaseController {
         if (${entityName?uncap_first}.getCid() != null) {
         	logger.info("${entityName?uncap_first}Service.updateNotNull,cid="+${entityName?uncap_first}.getCid());
         	<#if hasModifyTime=="true">
-        	${entityName?uncap_first}.setModifyTime(new Date());
+        	${entityName?uncap_first}.setModifyTime(System.currentTimeMillis());
         	</#if>
         	<#if hasModifyDate=="true">
-        	${entityName?uncap_first}.setModifyDate(new Date());
+        	${entityName?uncap_first}.setModifyDate(System.currentTimeMillis());
         	</#if>
             ${entityName?uncap_first}Service.updateNotNull(${entityName?uncap_first});
         } else {
@@ -171,16 +171,16 @@ public class ${entityName}Controller extends BaseController {
         	${entityName?uncap_first}.setStatus(1);
         	</#if>
         	<#if hasCreateTime=="true">
-        	${entityName?uncap_first}.setCreateTime(new Date());
+        	${entityName?uncap_first}.setCreateTime(System.currentTimeMillis());
         	</#if>
         	<#if hasModifyTime=="true">
-        	${entityName?uncap_first}.setModifyTime(new Date());
+        	${entityName?uncap_first}.setModifyTime(System.currentTimeMillis());
         	</#if>
         	<#if hasCreateDate=="true">
-        	${entityName?uncap_first}.setCreateDate(new Date());
+        	${entityName?uncap_first}.setCreateDate(System.currentTimeMillis());
         	</#if>
         	<#if hasModifyDate=="true">
-        	${entityName?uncap_first}.setModifyDate(new Date());
+        	${entityName?uncap_first}.setModifyDate(System.currentTimeMillis());
         	</#if>
         	<#if hasCreateUser=="true">
         	${entityName?uncap_first}.setCreateUser(this.getCurrentUserId());
