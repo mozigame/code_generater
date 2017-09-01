@@ -75,7 +75,7 @@ import ${module}.service.I${entityName}Service;
  * @since ${.now}
  */
 @Controller
-@RequestMapping("/${project}/${simpleModule}/${entityName?uncap_first}")
+@RequestMapping("/${project}/${entityName?uncap_first}")
 public class ${entityName}Controller extends BaseController {
 	private static final Log logger = LogFactory.getLog(${entityName}Controller.class);
 
@@ -91,15 +91,14 @@ public class ${entityName}Controller extends BaseController {
 		
     @RequestMapping(value = {"index", "index.html", ""})
     public ModelAndView index(${entityName}PO ${entityName?uncap_first}){
-    	ModelAndView result = new ModelAndView("${project}/${simpleModule}/ey_${entityName?uncap_first}");
-    	return result;
+    	return new ModelAndView("${project}/ey_${entityName?uncap_first}");;
     }
     
     @RequestMapping(value = {"list"})
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
     public PageVO<${entityName}PO> findByPage(${entityName}PO ${entityName?uncap_first}) {
-    	PageVO<${entityName}PO> pageVO = new PageVO<${entityName}PO>(this.getRequest());
+    	PageVO<${entityName}PO> pageVO = new PageVO<>(this.getRequest());
     	pageVO = ${entityName?uncap_first}Service.findPageBy${entityName}(${entityName?uncap_first}, pageVO);
     	<#list columns as column>
 		<#if column.showInPO && column.FK>
@@ -197,7 +196,7 @@ public class ${entityName}Controller extends BaseController {
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
     public RetData<Integer> delete(@RequestParam("id") Long id) {
-        RetData<Integer> ret = new RetData<Integer>();
+        RetData<Integer> ret = new RetData<>();
 		try {
 			<#if hasIfDel=="true">
 			Long userId = AppContext.getCurrentUserId();
@@ -213,55 +212,4 @@ public class ${entityName}Controller extends BaseController {
 		}
         return ret;
     }
-    
-    /*
-    @SuppressWarnings("unchecked")
-	@RequestMapping(value = "/apis/${entityName?uncap_first}/list/{page}", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-    public RetData<Object> ${entityName?uncap_first}List(@PathVariable(value="page") Integer page, 
-    		@RequestParam(value="size", required=false, defaultValue="15") Integer size) {
-		try {
-			PageVO<${entityName}PO> pageVO = new PageVO<${entityName}PO>(page, size);
-			pageVO.setOrderDesc("cid");
-			PageVO<${entityName}PO> retPage = ${entityName?uncap_first}Service.findPageBy${entityName}(null, pageVO);
-			<#list columns as column>
-			<#if column.showInPO && column.FK>
-			List<Long> ${column.fieldName}List = new ArrayList<Long>();
-		    try {
-	    		${column.fieldName}List = ObjectToMapUtil.getDataPropListByName(retPage.getRows(), "${column.fieldName}");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			if(${column.fieldName}List.size() > 0) {
-				List<${column.fkRelField?cap_first}PO> ${column.fkRelField}POList = ${column.fkRelField}Service.findByIds(${column.fieldName}List);
-			    </#if>
-				</#list>
-				<#if hasFK>
-				for (${entityName}PO ${entityName?uncap_first}PO : retPage.getRows()) {
-				</#if>
-				<#list columns as column>
-				<#if column.showInPO && column.FK>
-					for (${column.fkRelField?cap_first}PO ${column.fkRelField}PO : ${column.fkRelField}POList) {
-						if(${entityName?uncap_first}PO.get${column.fkRelField?cap_first}Id() == ${column.fkRelField}PO.getCid()) {
-							//TODO this set query field
-							break;
-						}
-					}
-			    </#if>
-				</#list>
-				<#if hasFK>
-				}
-				</#if>
-			}
-			Map<String, Object> retMap = new HashMap<>();
-			retMap.put("total", retPage.getTotal());
-			retMap.put("list", retPage.getRows());
-			return new RetData<>(retMap);
-		} catch (Exception e) {
-			logger.error(e.getMessage(), e);
-			return RetData.unknowError(e.getMessage());
-		}
-    }*/
-
 }
