@@ -196,7 +196,7 @@ public class ${entityName}Controller extends BaseController {
     @ResponseStatus(value = HttpStatus.OK)
     @ResponseBody
     public RetData<Integer> delete(@RequestParam("id") Long id) {
-        RetData<Integer> ret = new RetData<>();
+        RetData<Integer> ret;
 		try {
 			<#if hasIfDel=="true">
 			Long userId = AppContext.getCurrentUserId();

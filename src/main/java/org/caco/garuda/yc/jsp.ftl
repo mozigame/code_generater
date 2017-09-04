@@ -82,7 +82,7 @@
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="onDestroy()">删除</a>
 		    </div>
 		    <table id="dg" class="easyui-datagrid" data-options="onDblClickRow:onDblClick, onClickRow:onClick, onLoadSuccess:function(){$('.datagrid-btable').find('div.datagrid-cell').css('text-align','left');}"
-		            url="/${project}/${simpleModule}/${entityName?uncap_first}/list"
+		            url="/${simpleModule}/${entityName?uncap_first}/list"
 		            toolbar="#toolbar" pagination="true"
 		            rownumbers="true" fitColumns="true" singleSelect="true" style="display:none;">
 		        <thead>
@@ -212,7 +212,7 @@
             	}
             }
             $('#fm').form('submit',{
-                url: '/${project}/${simpleModule}/${entityName?uncap_first}/save',
+                url: '/${simpleModule}/${entityName?uncap_first}/save',
                 onSubmit: function(){
                     return $(this).form('validate');
                 },
@@ -236,7 +236,7 @@
             if (row){
                 $.messager.confirm('删除确认','你确定删除此记录?',function(r){
                     if (r){
-                        $.post('/${project}/${simpleModule}/${entityName?uncap_first}/delete',{id:row.cid},function(result){
+                        $.post('/${simpleModule}/${entityName?uncap_first}/delete',{id:row.cid},function(result){
                             if (result.err=='SUCCESS' || result.err==''){
                             	$.messager.show({    // show error message
                                     title: '系统消息',
