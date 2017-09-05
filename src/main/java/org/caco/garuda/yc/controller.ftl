@@ -66,7 +66,7 @@ import com.babel.common.core.page.PageVO;
 import com.babel.common.web.context.AppContext;
 import com.babel.common.core.exception.BaseException;
 </#if>
-import com.babel.common.web.controller.BaseController;
+import com.babel.common.web.controller.WebBaseController;
 import ${module}.model.${entityName}PO;
 import ${module}.service.I${entityName}Service;
 
@@ -76,7 +76,7 @@ import ${module}.service.I${entityName}Service;
  */
 @Controller
 @RequestMapping("/${project}/${entityName?uncap_first}")
-public class ${entityName}Controller extends BaseController {
+public class ${entityName}Controller extends WebBaseController {
 	private static final Log logger = LogFactory.getLog(${entityName}Controller.class);
 
     @Autowired
@@ -91,7 +91,7 @@ public class ${entityName}Controller extends BaseController {
 		
     @RequestMapping(value = {"index", "index.html", ""})
     public ModelAndView index(${entityName}PO ${entityName?uncap_first}){
-    	return new ModelAndView("${project}/ey_${entityName?uncap_first}");;
+    	return new ModelAndView("${project}/ey_${entityName?uncap_first}");
     }
     
     @RequestMapping(value = {"list"})
@@ -157,9 +157,9 @@ public class ${entityName}Controller extends BaseController {
         	<#if hasModifyTime=="true">
         	${entityName?uncap_first}.setModifyTime(System.currentTimeMillis());
         	</#if>
-        	<#if hasModifyDate=="true">
-        	${entityName?uncap_first}.setModifyDate(System.currentTimeMillis());
-        	</#if>
+			<#if hasModifyUser=="true">
+			${entityName?uncap_first}.setModifyUser(this.getCurrentUserId());
+			</#if>
             ${entityName?uncap_first}Service.updateNotNull(${entityName?uncap_first});
         } else {
         	logger.info("${entityName?uncap_first}Service.save,cid="+${entityName?uncap_first}.getCid());
@@ -167,19 +167,13 @@ public class ${entityName}Controller extends BaseController {
         	${entityName?uncap_first}.setIfDel(0);
         	</#if>
         	<#if hasStatus=="true">
-        	${entityName?uncap_first}.setStatus(1);
+        	${entityName?uncap_first}.setStatus(0);
         	</#if>
         	<#if hasCreateTime=="true">
         	${entityName?uncap_first}.setCreateTime(System.currentTimeMillis());
         	</#if>
         	<#if hasModifyTime=="true">
         	${entityName?uncap_first}.setModifyTime(System.currentTimeMillis());
-        	</#if>
-        	<#if hasCreateDate=="true">
-        	${entityName?uncap_first}.setCreateDate(System.currentTimeMillis());
-        	</#if>
-        	<#if hasModifyDate=="true">
-        	${entityName?uncap_first}.setModifyDate(System.currentTimeMillis());
         	</#if>
         	<#if hasCreateUser=="true">
         	${entityName?uncap_first}.setCreateUser(this.getCurrentUserId());
