@@ -15,9 +15,9 @@
     <!-- 重复生成会删除旧的代码再生成新的 -->
     <bean id="config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="lp_period_manage"/>
+        <property name="tableName" value="lo_approve_flow"/>
         <!-- 实体名称  -->
-        <property name="entityName" value="PeriodManage"/>
+        <property name="entityName" value="ApproveFlow"/>
         <!-- 模块名称，代码安放的目录 -->
         <property name="modelName" value="ares"/>
         <!-- 全包名 -->
