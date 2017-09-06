@@ -128,6 +128,7 @@ public class ${entityName}Controller extends WebBaseController {
 		<#if hasFK>
 		}
 		</#if>
+        this.initDisp(pageVO.getRows());
     	return pageVO;
     }
 

@@ -24,6 +24,8 @@
       }
       .fitem label{
           display:inline-block;
+          text-align: right;
+          margin-right: 10px;
           width:60px;
       }
       .input_query{
@@ -75,7 +77,7 @@
 		</div>
 		
 		<!-- 查询结果 center -->
-	    <div data-options="region:'center', title:'查询结果'">
+	    <div data-options="region:'center', title:'${comment}'">
 	    	<div id="toolbar" style="display:none;">
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="onAdd()">新增</a>
 		        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="onEdit()">修改</a>
@@ -173,7 +175,7 @@
 	
         var url;
         function onAdd(){
-            $('#dlg').dialog('open').dialog('setTitle','New ${entityName}');
+            $('#dlg').dialog('open').dialog('setTitle','新增'+${comment});
             $('#fm').form('clear');
             $('#${entityName?uncap_first}_status').combobox('select', '1');
             //$("#${entityName?uncap_first}_remark").val('test');
@@ -195,7 +197,7 @@
             	var entityName='${entityName?uncap_first}';
             	$('#fm').form('clear');
             	var obj = getRowData(entityName, row);
-                $('#dlg').dialog('open').dialog('setTitle','Edit ${entityName}');
+                $('#dlg').dialog('open').dialog('setTitle','修改'+ ${comment});
                 $('#fm').form('load',obj);
             }
            
