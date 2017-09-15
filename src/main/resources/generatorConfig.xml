@@ -15,9 +15,9 @@
     <!-- 重复生成会删除旧的代码再生成新的 -->
     <bean id="config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="lo_period_rule_item"/>
+        <property name="tableName" value="lo_plays_h5"/>
         <!-- 实体名称  -->
-        <property name="entityName" value="PeriodRuleItem"/>
+        <property name="entityName" value="PlaysH5"/>
         <!-- 模块名称，代码安放的目录 -->
         <property name="modelName" value="ares"/>
         <!-- 全包名 -->
