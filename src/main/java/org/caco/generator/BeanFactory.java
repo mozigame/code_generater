@@ -9,7 +9,7 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.ClassPathResource;
 
 public class BeanFactory {
-	 static ClassPathResource resource = new ClassPathResource("generatorConfig_riskManagement.xml");
+	 static ClassPathResource resource = new ClassPathResource("generatorConfig.xml");
 	 static DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
 	 static XmlBeanDefinitionReader reader =  new XmlBeanDefinitionReader(factory);
      static{
