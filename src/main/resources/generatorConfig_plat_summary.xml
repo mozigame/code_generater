@@ -5,23 +5,23 @@
        default-autowire="byName" default-lazy-init="false">
     <bean id="dataSource" class="org.caco.generator.util.DataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.0.253:3306/lottery?characterEncoding=utf-8"/>
+        <property name="url" value="jdbc:mysql://192.168.0.244:3306/pf-order-10001?characterEncoding=utf-8"/>
         <property name="username" value="root"/>
-        <property name="password" value="admin"/>
+        <property name="password" value="123456"/>
     </bean>
     <bean id="mySqlHelper" class="org.caco.generator.util.MySqlHelper">
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="lo_risk_order_record_config" class="org.caco.generator.bean.Config">
+    <bean id="user_order_summary_for_plat_config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="lo_risk_order_record"/>
+        <property name="tableName" value="user_order_summary_for_plat"/>
         <!-- 实体名称  -->
-        <property name="entityName" value="RiskOrderRecord"/>
+        <property name="entityName" value="UserOrderSummaryForPlat"/>
         <!-- 模块名称，代码安放的目录 -->
-        <property name="modelName" value="risk"/>
+        <property name="modelName" value="order.summary"/>
         <!-- 全包名 -->
-        <property name="pakeage" value="com.babel.service.riskmanagement.storage.dao.mysql"/>
+        <property name="pakeage" value="com.babel.hermes.dao.pf"/>
         <!-- 代码作者 -->
         <property name="author" value="roachjiang"/>
         <!-- 精确匹配查询，多个以","隔开 -->
@@ -31,9 +31,6 @@
         <!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
         <!--<property name="hidePOColumns" value="createTime,createUser,modifyUser,modifyTime"/>-->
         <!-- 定义哪些属性在jsp grid中显示或不显示，多个以","隔开，属性前添加"!"相反 -->
-        <property name="hideGridColumns" value="cid,memberId,
-        platInfoId,ownerId,parentOrderId,ifDel,operatorId,
-        createTime,createUser,modifyUser,modifyTime"/>
         <!-- 编辑时绑定下拉数据 -->
         <!-- 		<property name="dictColumns" value="status:dict_tf_status"/> -->
         <!-- 编辑时绑定下拉数据，包含all选项 -->
@@ -43,15 +40,15 @@
     </bean>
 
     <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="lo_hostile_order_record_config" class="org.caco.generator.bean.Config">
+    <bean id="user_order_summary_for_owner_config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="lo_hostile_order_record"/>
+        <property name="tableName" value="user_order_summary_for_owner"/>
         <!-- 实体名称  -->
-        <property name="entityName" value="HostileOrderRecord"/>
+        <property name="entityName" value="UserOrderSummaryForOwner"/>
         <!-- 模块名称，代码安放的目录 -->
-        <property name="modelName" value="risk"/>
+        <property name="modelName" value="order.summary"/>
         <!-- 全包名 -->
-        <property name="pakeage" value="com.babel.service.riskmanagement.storage.dao.mysql"/>
+        <property name="pakeage" value="com.babel.hermes.dao.pf"/>
         <!-- 代码作者 -->
         <property name="author" value="roachjiang"/>
         <!-- 精确匹配查询，多个以","隔开 -->
@@ -59,9 +56,8 @@
         <!-- 模糊查询条件，多个以","隔开 -->
         <!--<property name="likeSearchColumns" value="modifyUser,description"/>-->
         <!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
-        <property name="hidePOColumns" value="createTime,createUser,modifyUser,modifyTime"/>
+        <!--<property name="hidePOColumns" value="createTime,createUser,modifyUser,modifyTime"/>-->
         <!-- 定义哪些属性在jsp grid中显示或不显示，多个以","隔开，属性前添加"!"相反 -->
-        <property name="hideGridColumns" value="memberId,platInfoId,ownerId,ifDel,operatorId,remark,createTime,createUser,modifyUser,modifyTime"/>
         <!-- 编辑时绑定下拉数据 -->
         <!-- 		<property name="dictColumns" value="status:dict_tf_status"/> -->
         <!-- 编辑时绑定下拉数据，包含all选项 -->
@@ -71,43 +67,15 @@
     </bean>
 
     <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="lo_risk_order_record_errorbackup_config" class="org.caco.generator.bean.Config">
-    <!-- 表名  -->
-    <property name="tableName" value="lo_risk_order_record_errorbackup"/>
-    <!-- 实体名称  -->
-    <property name="entityName" value="RiskOrderRecordBackup"/>
-    <!-- 模块名称，代码安放的目录 -->
-    <property name="modelName" value="risk"/>
-    <!-- 全包名 -->
-    <property name="pakeage" value="com.babel.service.riskmanagement.storage.dao.mysql"/>
-    <!-- 代码作者 -->
-    <property name="author" value="roachjiang"/>
-    <!-- 精确匹配查询，多个以","隔开 -->
-    <!--<property name="equalsSearchColumns" value="code,name,status,expireDate"/>-->
-    <!-- 模糊查询条件，多个以","隔开 -->
-    <!--<property name="likeSearchColumns" value="modifyUser,description"/>-->
-    <!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
-    <property name="hidePOColumns" value="createTime,createUser,modifyUser,modifyTime"/>
-    <!-- 定义哪些属性在jsp grid中显示或不显示，多个以","隔开，属性前添加"!"相反 -->
-    <!-- 编辑时绑定下拉数据 -->
-    <!-- 		<property name="dictColumns" value="status:dict_tf_status"/> -->
-    <!-- 编辑时绑定下拉数据，包含all选项 -->
-    <!--	<property name="dictAllColumns" value="type:dict_lh_qty_count_type"/>-->
-    <!-- 外键关联，查询关联的名称 -->
-    <!-- 		<property name="fkColumns" value="systemInfoId:systemInfo,intfInfoId:intfInfo"/> -->
-    </bean>
-
-
-    <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="lp_order_exp_config" class="org.caco.generator.bean.Config">
+    <bean id="user_order_summary_for_member_config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="lp_order_exp"/>
+        <property name="tableName" value="user_order_summary_for_member"/>
         <!-- 实体名称  -->
-        <property name="entityName" value="OrderExp"/>
+        <property name="entityName" value="UserOrderSummaryForMember"/>
         <!-- 模块名称，代码安放的目录 -->
-        <property name="modelName" value="risk"/>
+        <property name="modelName" value="order.summary"/>
         <!-- 全包名 -->
-        <property name="pakeage" value="com.babel.service.riskmanagement.storage.dao.mysql"/>
+        <property name="pakeage" value="com.babel.hermes.dao.pf"/>
         <!-- 代码作者 -->
         <property name="author" value="roachjiang"/>
         <!-- 精确匹配查询，多个以","隔开 -->
@@ -115,7 +83,7 @@
         <!-- 模糊查询条件，多个以","隔开 -->
         <!--<property name="likeSearchColumns" value="modifyUser,description"/>-->
         <!-- 定义哪些属性在PO中生成或不生成，多个以","隔开，属性前添加"!"相反 -->
-        <property name="hidePOColumns" value="createTime,createUser,modifyUser,modifyTime"/>
+        <!--<property name="hidePOColumns" value="createTime,createUser,modifyUser,modifyTime"/>-->
         <!-- 定义哪些属性在jsp grid中显示或不显示，多个以","隔开，属性前添加"!"相反 -->
         <!-- 编辑时绑定下拉数据 -->
         <!-- 		<property name="dictColumns" value="status:dict_tf_status"/> -->
