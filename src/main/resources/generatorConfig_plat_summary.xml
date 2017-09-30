@@ -13,9 +13,9 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
     <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="user_order_summary_for_plat_config" class="org.caco.generator.bean.Config">
+    <bean id="lo_user_order_summary_for_plat_config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="user_order_summary_for_plat"/>
+        <property name="tableName" value="lo_user_order_summary_for_plat"/>
         <!-- 实体名称  -->
         <property name="entityName" value="UserOrderSummaryForPlat"/>
         <!-- 模块名称，代码安放的目录 -->
@@ -40,9 +40,9 @@
     </bean>
 
     <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="user_order_summary_for_owner_config" class="org.caco.generator.bean.Config">
+    <bean id="lo_user_order_summary_for_owner_config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="user_order_summary_for_owner"/>
+        <property name="tableName" value="lo_user_order_summary_for_owner"/>
         <!-- 实体名称  -->
         <property name="entityName" value="UserOrderSummaryForOwner"/>
         <!-- 模块名称，代码安放的目录 -->
@@ -67,9 +67,9 @@
     </bean>
 
     <!-- 重复生成会删除旧的代码再生成新的 -->
-    <bean id="user_order_summary_for_member_config" class="org.caco.generator.bean.Config">
+    <bean id="lo_user_order_summary_for_member_config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="user_order_summary_for_member"/>
+        <property name="tableName" value="lo_user_order_summary_for_member"/>
         <!-- 实体名称  -->
         <property name="entityName" value="UserOrderSummaryForMember"/>
         <!-- 模块名称，代码安放的目录 -->
