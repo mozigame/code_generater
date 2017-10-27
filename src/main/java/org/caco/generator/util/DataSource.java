@@ -59,6 +59,7 @@ public class DataSource {
             props.setProperty("password", password);
             props.setProperty("remarks", "true"); //设置可以获取remarks信息 
             props.setProperty("useInformationSchema", "true");//设置可以获取tables remarks信息
+			props.setProperty("useSSL", "false");
             conn = DriverManager.getConnection(url, props);
 		} catch (SQLException e) {
 			e.printStackTrace();
