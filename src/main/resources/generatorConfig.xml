@@ -5,9 +5,9 @@
        default-autowire="byName" default-lazy-init="false">
     <bean id="dataSource" class="org.caco.generator.util.DataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://192.168.0.253:3306/lottery?characterEncoding=utf-8"/>
+        <property name="url" value="jdbc:mysql://192.168.0.244:3306/ares-cms?characterEncoding=utf-8"/>
         <property name="username" value="root"/>
-        <property name="password" value="admin"/>
+        <property name="password" value="123456"/>
     </bean>
     <bean id="mySqlHelper" class="org.caco.generator.util.MySqlHelper">
         <property name="dataSource" ref="dataSource"/>
@@ -15,13 +15,13 @@
     <!-- 重复生成会删除旧的代码再生成新的 -->
     <bean id="config" class="org.caco.generator.bean.Config">
         <!-- 表名  -->
-        <property name="tableName" value="lo_plays_h5"/>
+        <property name="tableName" value="lp_bulletin"/>
         <!-- 实体名称  -->
-        <property name="entityName" value="PlaysH5"/>
+        <property name="entityName" value="Bulletin"/>
         <!-- 模块名称，代码安放的目录 -->
-        <property name="modelName" value="ares"/>
+        <property name="modelName" value="cms"/>
         <!-- 全包名 -->
-        <property name="pakeage" value="com.babel.ares"/>
+        <property name="pakeage" value="com.babel.cms"/>
         <!-- 代码作者 -->
         <property name="author" value="Ivan"/>
         <!-- 精确匹配查询，多个以","隔开 -->

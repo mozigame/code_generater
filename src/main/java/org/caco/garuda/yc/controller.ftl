@@ -48,7 +48,6 @@ import java.util.List;
 
 </#if>
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -74,8 +73,8 @@ import ${module}.service.I${entityName}Service;
  * @author ${author}
  * @since ${.now}
  */
-@Controller
-@RequestMapping("/${project}/${entityName?uncap_first}")
+@RestController
+@RequestMapping("/apis/${entityName?uncap_first}")
 public class ${entityName}Controller extends WebBaseController {
 	private static final Log logger = LogFactory.getLog(${entityName}Controller.class);
 
@@ -89,15 +88,9 @@ public class ${entityName}Controller extends WebBaseController {
     </#if>
 	</#list>
 		
-    @RequestMapping(value = {"index", "index.html", ""})
-    public ModelAndView index(${entityName}PO ${entityName?uncap_first}){
-    	return new ModelAndView("${project}/ey_${entityName?uncap_first}");
-    }
-    
-    @RequestMapping(value = {"list"})
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-    public PageVO<${entityName}PO> findByPage(${entityName}PO ${entityName?uncap_first}) {
+
+    @GetMapping(value = {"list"})
+    public RetData<PageVO<${entityName}PO>> findByPage(${entityName}PO ${entityName?uncap_first}) {
     	PageVO<${entityName}PO> pageVO = new PageVO<>(this.getRequest());
     	pageVO = ${entityName?uncap_first}Service.findPageBy${entityName}(${entityName?uncap_first}, pageVO);
     	<#list columns as column>
@@ -128,14 +121,11 @@ public class ${entityName}Controller extends WebBaseController {
 		<#if hasFK>
 		}
 		</#if>
-        this.initDisp(pageVO.getRows());
-    	return pageVO;
+    	return new RetData<>(pageVO);
     }
 
 
-    @RequestMapping(value = "view", method = RequestMethod.GET)
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
+    @GetMapping(value = "view")
     public RetData<${entityName}PO> view(${entityName}PO ${entityName?uncap_first}) {
         if (${entityName?uncap_first}.getCid() != null) {
             ${entityName?uncap_first} = ${entityName?uncap_first}Service.selectByKey(${entityName?uncap_first}.getCid());
@@ -149,17 +139,17 @@ public class ${entityName}Controller extends WebBaseController {
      * @param ${entityName?uncap_first}
      * @return
      */
-    @RequestMapping(value = "save", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
-    public RetData<Long> save(${entityName}PO ${entityName?uncap_first}) {
+    @RequestMapping(value = "save")
+    public RetData<Long> save(
+		@RequestBody ${entityName}PO ${entityName?uncap_first}
+	) {
         if (${entityName?uncap_first}.getCid() != null) {
         	logger.info("${entityName?uncap_first}Service.updateNotNull,cid="+${entityName?uncap_first}.getCid());
         	<#if hasModifyTime=="true">
         	${entityName?uncap_first}.setModifyTime(System.currentTimeMillis());
         	</#if>
 			<#if hasModifyUser=="true">
-			${entityName?uncap_first}.setModifyUser(this.getCurrentUserId());
+			${entityName?uncap_first}.setModifyUser(1L);
 			</#if>
             ${entityName?uncap_first}Service.updateNotNull(${entityName?uncap_first});
         } else {
@@ -177,10 +167,10 @@ public class ${entityName}Controller extends WebBaseController {
         	${entityName?uncap_first}.setModifyTime(System.currentTimeMillis());
         	</#if>
         	<#if hasCreateUser=="true">
-        	${entityName?uncap_first}.setCreateUser(this.getCurrentUserId());
+        	${entityName?uncap_first}.setCreateUser(1L);
         	</#if>
         	<#if hasModifyUser=="true">
-        	${entityName?uncap_first}.setModifyUser(this.getCurrentUserId());
+        	${entityName?uncap_first}.setModifyUser(1L);
         	</#if>
             ${entityName?uncap_first}Service.save(${entityName?uncap_first});
         }
@@ -188,13 +178,11 @@ public class ${entityName}Controller extends WebBaseController {
     }
 
 	@RequestMapping(value = {"delete"})
-    @ResponseStatus(value = HttpStatus.OK)
-    @ResponseBody
     public RetData<Integer> delete(@RequestParam("id") Long id) {
         RetData<Integer> ret = new RetData<>();
 		try {
 			<#if hasIfDel=="true">
-			Long userId = AppContext.getCurrentUserId();
+			Long userId = 1L;
 			ret =this.${entityName?uncap_first}Service.deleteVirtual(userId, id);
 			</#if>
 			<#if hasIfDel=="false">
